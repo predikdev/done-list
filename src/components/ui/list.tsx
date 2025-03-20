@@ -21,7 +21,8 @@ export default function List({
 const listVariants = cva('rounded-md', {
   variants: {
     variant: {
-      default: 'py-2 rounded-md hover:bg-slate-200 hover:cursor-pointer',
+      default:
+        'relative flex items-center p-2 rounded-md hover:bg-gray-200 hover:cursor-pointer',
       link: 'text-red-500 ',
       outline: 'text-blue-500',
     },

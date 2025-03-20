@@ -13,7 +13,7 @@ export default function Link({ className, variant, ...props }: LinkProps) {
 const linkVariants = cva('rounded-md', {
   variants: {
     variant: {
-      default: '',
+      default: 'w-full',
       link: 'text-red-500 ',
       outline: 'text-blue-500',
     },
