@@ -1,0 +1,11 @@
+---
+import '../styles/global.css';
+import { Sidebar } from '@/components/sidebar';
+---
+
+<div class='app-provider text-primary flex'>
+  <Sidebar />
+  <main class='w-full p-4'>
+    <slot />
+  </main>
+</div>
