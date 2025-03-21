@@ -1,5 +1,10 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
+import { InboxContent } from '@/components/InboxContent';
 ---
 
-<MainLayout />
+<MainLayout>
+  <main class='w-full flex justify-center p-4'>
+    <InboxContent client:load />
+  </main>
+</MainLayout>
