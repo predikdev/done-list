@@ -49,7 +49,7 @@ export function LoginForm({
               </div>
               <div className='flex flex-col gap-3'>
                 <Button type='submit' className='w-full' asChild>
-                  <a href='/home'>Login</a>
+                  <a href='/dashboard'>Login</a>
                 </Button>
                 <Button variant='outline' className='w-full'>
                   Login with Google

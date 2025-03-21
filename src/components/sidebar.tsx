@@ -11,7 +11,7 @@ const projects = [
 ];
 
 const links = [
-  { id: 1, name: 'Dashboard', slug: 'home', icon: House },
+  { id: 1, name: 'Dashboard', slug: 'dashboard', icon: House },
   { id: 2, name: 'Inbox', slug: 'inbox', icon: Inbox, tasks: 12 },
   { id: 3, name: 'Today', slug: 'today', icon: Sun, tasks: 3 },
   { id: 4, name: 'Upcoming', slug: 'upcoming', icon: CalendarDays, tasks: 9 },
