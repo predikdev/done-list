@@ -1,9 +1,9 @@
 ---
 import '../styles/global.css';
-import { Sidebar } from '@/components/sidebar';
+import SidebarProvider from '@/components/sidebar/SidebarProvider';
 ---
 
 <div class='app-provider text-primary flex'>
-  <Sidebar />
+  <SidebarProvider client:only='react' />
   <slot />
 </div>
