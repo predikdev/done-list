@@ -9,7 +9,7 @@ type Link = {
   icon: string;
   slug: string;
   name: string;
-  tasks: number;
+  tasks?: number;
 };
 
 type Project = {
@@ -17,6 +17,33 @@ type Project = {
   name: string;
   slug: string;
 };
+
+const menuList = [
+  {
+    id: '1',
+    name: 'Dashboard',
+    icon: 'House',
+    slug: 'dashboard',
+  },
+  {
+    id: '2',
+    name: 'Inbox',
+    icon: 'Inbox',
+    slug: 'inbox',
+  },
+  {
+    id: '3',
+    name: 'Today',
+    icon: 'CalendarDays',
+    slug: 'today',
+  },
+  {
+    id: '4',
+    name: 'Upcoming',
+    icon: 'CalendarDays',
+    slug: 'upcoming',
+  },
+];
 
 const LINK_ORDER = {
   dashboard: 0,
@@ -47,19 +74,6 @@ export default function Sidebar() {
     return <SidebarSkeleton />;
   }
 
-  const sortedLinks = [...(links || [])].sort((a, b) => {
-    const orderA =
-      a.slug in LINK_ORDER
-        ? LINK_ORDER[a.slug as keyof typeof LINK_ORDER]
-        : 999;
-    const orderB =
-      b.slug in LINK_ORDER
-        ? LINK_ORDER[b.slug as keyof typeof LINK_ORDER]
-        : 999;
-
-    return orderA - orderB;
-  });
-
   return (
     <aside className='flex h-screen min-w-64 overflow-hidden relative border-r-1 '>
       <div className='sidebar w-full'>
@@ -72,26 +86,29 @@ export default function Sidebar() {
         <div className='divider absolute border-b-1 w-64'></div>
         <div className='main-section | p-4 flex flex-col justify-center min-h-[175px]'>
           <ul>
-            {sortedLinks.map((link: Link) => {
-              const Icon = getIcon(link.icon);
-              return (
-                <List key={link.id}>
-                  <Link href={'/' + link.slug}>
-                    <div className='content | flex items-center justify-between w-full gap-x-2'>
-                      <div className='flex items-center gap-x-2'>
-                        <Icon size={16} />
-                        <p className='font-normal'>{link.name}</p>
+            {(links && links.length > 0 ? links : menuList).map(
+              (link: Link) => {
+                const Icon = getIcon(link.icon);
+                return (
+                  <List key={link.id}>
+                    <Link href={'/' + link.slug}>
+                      <div className='content | flex items-center justify-between w-full gap-x-2'>
+                        <div className='flex items-center gap-x-2'>
+                          <Icon size={16} />
+                          <p className='font-normal'>{link.name}</p>
+                        </div>
+                        {link.tasks !== null ||
+                          (link.tasks !== undefined && (
+                            <p className='rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground'>
+                              {link.tasks}
+                            </p>
+                          ))}
                       </div>
-                      {link.tasks !== null && (
-                        <p className='rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground'>
-                          {link.tasks}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                </List>
-              );
-            })}
+                    </Link>
+                  </List>
+                );
+              }
+            )}
           </ul>
         </div>
         <div className='projects | flex flex-col justify-center p-4'>
