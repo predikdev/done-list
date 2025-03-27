@@ -18,6 +18,13 @@ type Project = {
   slug: string;
 };
 
+const LINK_ORDER = {
+  dashboard: 0,
+  inbox: 1,
+  today: 2,
+  upcoming: 3,
+};
+
 export default function Sidebar() {
   const { links, projects, loading } = useData();
 
@@ -40,8 +47,21 @@ export default function Sidebar() {
     return <SidebarSkeleton />;
   }
 
+  const sortedLinks = [...(links || [])].sort((a, b) => {
+    const orderA =
+      a.slug in LINK_ORDER
+        ? LINK_ORDER[a.slug as keyof typeof LINK_ORDER]
+        : 999;
+    const orderB =
+      b.slug in LINK_ORDER
+        ? LINK_ORDER[b.slug as keyof typeof LINK_ORDER]
+        : 999;
+
+    return orderA - orderB;
+  });
+
   return (
-    <aside className='flex h-screen w-64 overflow-hidden relative border-r-1 '>
+    <aside className='flex h-screen min-w-64 overflow-hidden relative border-r-1 '>
       <div className='sidebar w-full'>
         <div className='top | p-4 flex items-center justify-between'>
           <div className='logo | flex items-center justify-center gap-2'>
@@ -52,7 +72,7 @@ export default function Sidebar() {
         <div className='divider absolute border-b-1 w-64'></div>
         <div className='main-section | p-4 flex flex-col justify-center min-h-[175px]'>
           <ul>
-            {links?.map((link: Link) => {
+            {sortedLinks.map((link: Link) => {
               const Icon = getIcon(link.icon);
               return (
                 <List key={link.id}>
