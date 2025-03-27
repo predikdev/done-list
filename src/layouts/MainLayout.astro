@@ -1,9 +1,17 @@
 ---
 import '../styles/global.css';
-import SidebarProvider from '@/components/sidebar/SidebarProvider';
 ---
 
-<div class='app-provider text-primary flex'>
-  <SidebarProvider client:load />
-  <slot />
-</div>
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <body class='text-primary flex min-h-screen'>
+    <slot />
+  </body>
+</html>

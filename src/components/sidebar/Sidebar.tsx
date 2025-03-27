@@ -1,11 +1,25 @@
+import { useData } from '@/store/DataContext';
+import { SidebarSkeleton } from './SidebarSkeleton';
 import { Inbox, CalendarDays, House, SquareCheckBig, Sun } from 'lucide-react';
 import Link from '../ui/link';
 import List from '../ui/list';
-import { useLinks } from '@/store/DataContext';
-import { SidebarSkeleton } from './SidebarSkeleton';
 
-export function Sidebar() {
-  const { links, projects, loading, error } = useLinks();
+type Link = {
+  id: string;
+  icon: string;
+  slug: string;
+  name: string;
+  tasks: number;
+};
+
+type Project = {
+  id: string;
+  name: string;
+  slug: string;
+};
+
+export default function Sidebar() {
+  const { links, projects, loading } = useData();
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -38,7 +52,7 @@ export function Sidebar() {
         <div className='divider absolute border-b-1 w-64'></div>
         <div className='main-section | p-4 flex flex-col justify-center min-h-[175px]'>
           <ul>
-            {links.map((link) => {
+            {links?.map((link: Link) => {
               const Icon = getIcon(link.icon);
               return (
                 <List key={link.id}>
@@ -63,7 +77,7 @@ export function Sidebar() {
         <div className='projects | flex flex-col justify-center p-4'>
           <p className='text-xs text-primary/60 font-semibold'>Projects</p>
           <ul>
-            {projects.map((project) => (
+            {projects?.map((project: Project) => (
               <List key={project.id}>
                 <Link href={'/' + project.slug}>
                   <div className='content | flex items-center gap-x-2 '>
