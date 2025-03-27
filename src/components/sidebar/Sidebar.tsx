@@ -86,29 +86,27 @@ export default function Sidebar() {
         <div className='divider absolute border-b-1 w-64'></div>
         <div className='main-section | p-4 flex flex-col justify-center min-h-[175px]'>
           <ul>
-            {(links && links.length > 0 ? links : menuList).map(
-              (link: Link) => {
-                const Icon = getIcon(link.icon);
-                return (
-                  <List key={link.id}>
-                    <Link href={'/' + link.slug}>
-                      <div className='content | flex items-center justify-between w-full gap-x-2'>
-                        <div className='flex items-center gap-x-2'>
-                          <Icon size={16} />
-                          <p className='font-normal'>{link.name}</p>
-                        </div>
-                        {link.tasks !== null ||
-                          (link.tasks !== undefined && (
-                            <p className='rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground'>
-                              {link.tasks}
-                            </p>
-                          ))}
+            {menuList.map((link: Link) => {
+              const Icon = getIcon(link.icon);
+              return (
+                <List key={link.id}>
+                  <Link href={'/' + link.slug}>
+                    <div className='content | flex items-center justify-between w-full gap-x-2'>
+                      <div className='flex items-center gap-x-2'>
+                        <Icon size={16} />
+                        <p className='font-normal'>{link.name}</p>
                       </div>
-                    </Link>
-                  </List>
-                );
-              }
-            )}
+                      {link.tasks !== null ||
+                        (link.tasks !== undefined && (
+                          <p className='rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground'>
+                            {link.tasks}
+                          </p>
+                        ))}
+                    </div>
+                  </Link>
+                </List>
+              );
+            })}
           </ul>
         </div>
         <div className='projects | flex flex-col justify-center p-4'>
