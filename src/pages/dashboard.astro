@@ -1,6 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import App from '@/components/App';
+import DashboardWrapper from '@/components/Dashboard/DashboardWrapper';
 
 import { supabase } from '@/lib/supabase';
 
@@ -34,7 +34,7 @@ try {
 ---
 
 <MainLayout>
-  <App
+  <DashboardWrapper
     client:load
     links={linksData}
     projects={projectsData}
