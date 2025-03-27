@@ -7,13 +7,15 @@ export function Dashboard() {
   const { links, projects, loading } = useData();
 
   let getTotalTasks = links.reduce((acc, link) => acc + link.tasks, 0);
+  let projectsCount = projects.length;
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
+    <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4 w-full min-h-32 h-fit'>
+      {/* Total Tasks */}
       <div className='rounded-lg border bg-white p-6 shadow-sm'>
         <div className='flex flex-row items-center justify-between space-y-0 pb-2'>
           <h3 className='text-sm font-medium'>Total Tasks</h3>
@@ -24,8 +26,7 @@ export function Dashboard() {
         </div>
       </div>
 
-      {/* Stat Card 2 */}
-
+      {/* Completed Tasks */}
       <div className='rounded-lg border bg-white p-6 shadow-sm'>
         <div className='flex flex-row items-center justify-between space-y-0 pb-2'>
           <h3 className='text-sm font-medium'>Completed</h3>
@@ -50,11 +51,13 @@ export function Dashboard() {
       {/* Stat Card 4 */}
       <div className='rounded-lg border bg-white p-6 shadow-sm'>
         <div className='flex flex-row items-center justify-between space-y-0 pb-2'>
-          <h3 className='text-sm font-medium'>Projects</h3>
+          <h3 className='text-sm font-medium'>
+            {projectsCount >= 2 ? 'Projects' : 'Project'}
+          </h3>
           <PieChart className='h-4 w-4 text-gray-500' />
         </div>
         <div>
-          <div className='text-2xl font-bold'>4</div>
+          <div className='text-2xl font-bold'>{projectsCount}</div>
         </div>
       </div>
     </div>
