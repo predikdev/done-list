@@ -1,6 +1,6 @@
 import { DataProvider } from '../store/DataContext';
 import Sidebar from './sidebar/Sidebar';
-import { Dashboard } from './Dashboard';
+import { Dashboard } from './Dashboard/Dashboard';
 
 export default function App({
   links,
